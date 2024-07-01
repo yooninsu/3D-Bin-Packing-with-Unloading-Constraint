@@ -44,15 +44,69 @@ class SubVolume:
         return (self.width >= item_width and
                 self.length >= item_length and
                 self.height >= item_height)
+    @property
+    def position(self):
+        return (self.x, self.y, self.z)
 
+    @property
+    def dimensions(self):
+        return (self.width, self.length, self.height)
+    
 # Container class to represent the container and manage packing
-class Container:
+class PackingAlgorithm:
     def __init__(self, width, length, height):
         self.width = width
         self.length = length
         self.height = height
         self.sub_volumes = [SubVolume(0, 0, 0, width, length, height)]
         self.packed_items = []
+        self.unloading_sequence = {}  # Populate this dictionary as needed
+
+    def pack_items_dbl(self, items):
+        best_packing = []
+        best_packing_count = 0
+        iterations = 1000  # Number of iterations to attempt
+
+        # Sort items based on location to ensure unloading in reverse order
+        items.sort(key=lambda x: x.location, reverse=True)
+
+        for _ in range(iterations):
+            self.reset()
+            random_items = random.sample(items, len(items))  # Randomly shuffle items
+            load_order = 0  # Initialize load order counter
+            for item in random_items:
+                placed = False
+                random_orientations = random.sample(item.possible_orientations(), len(item.possible_orientations()))  # Randomly shuffle orientations
+                
+                # Sort sub_volumes to prioritize bottom-left positions
+                self.sub_volumes.sort(key=lambda sv: (sv.z, sv.y, sv.x))
+                
+                for subvolume in self.sub_volumes:
+                    for orientation in random_orientations:
+                        if subvolume.can_accommodate(orientation):
+                            item_position = (subvolume.x, subvolume.y, subvolume.z)
+                            if self.is_supported(item_position, orientation):
+                                load_order += 1  # Increment load order
+                                item_load_order = load_order  # Assign current load order
+                                if item.id in self.unloading_sequence:
+                                    item_load_order = self.unloading_sequence[item.id]  # Assign predefined unloading sequence
+                                self.packed_items.append((item.id, item_position, orientation, item.location, item_load_order, item.weight))
+                                new_subvolumes = self.create_new_subvolumes(subvolume, orientation, item_position)
+                                self.sub_volumes.remove(subvolume)
+                                for new_subvolume in new_subvolumes:
+                                    self.insert_subvolume(new_subvolume)
+                                placed = True
+                                break
+                    if placed:
+                        break
+                if not placed:
+                    print(f"Item {item.id} could not be placed in this iteration.")
+                    break
+            if len(self.packed_items) > best_packing_count:
+                best_packing = list(self.packed_items)
+                best_packing_count = len(self.packed_items)
+
+        self.packed_items = best_packing
 
     def insert_subvolume(self, new_subvolume):
         self.sub_volumes.append(new_subvolume)
@@ -62,33 +116,46 @@ class Container:
         item_x, item_y, item_z = item_position
         item_width, item_length, item_height = item
 
-        if subvolume.width > item_width:
+        subvolume_x, subvolume_y, subvolume_z = subvolume.position
+        subvolume_width, subvolume_length, subvolume_height = subvolume.dimensions
+
+        # Right of the item
+        if subvolume_width > item_width:
             new_subvolumes.append(SubVolume(item_x + item_width, item_y, item_z,
-                                            subvolume.width - item_width, item_length, item_height))
-        if subvolume.length > item_length:
+                                            subvolume_width - item_width, item_length, item_height))
+
+        # In front of the item
+        if subvolume_length > item_length:
             new_subvolumes.append(SubVolume(item_x, item_y + item_length, item_z,
-                                            item_width, subvolume.length - item_length, item_height))
-        if subvolume.height > item_height:
+                                            item_width, subvolume_length - item_length, item_height))
+
+        # Above the item
+        if subvolume_height > item_height:
             new_subvolumes.append(SubVolume(item_x, item_y, item_z + item_height,
-                                            item_width, item_length, subvolume.height - item_height))
+                                            item_width, item_length, subvolume_height - item_height))
 
-        if subvolume.width > item_width and subvolume.length > item_length:
-            new_subvolumes.append(SubVolume(item_x + item_width, item_y + item_length, item_z,
-                                            subvolume.width - item_width, subvolume.length - item_length, item_height))
-
-        if subvolume.width > item_width and subvolume.height > item_height:
+        # Remaining space to the right and above
+        if subvolume_width > item_width and subvolume_height > item_height:
             new_subvolumes.append(SubVolume(item_x + item_width, item_y, item_z + item_height,
-                                            subvolume.width - item_width, item_length, subvolume.height - item_height))
+                                            subvolume_width - item_width, item_length, subvolume_height - item_height))
 
-        if subvolume.length > item_length and subvolume.height > item_height:
+        # Remaining space to the front and above
+        if subvolume_length > item_length and subvolume_height > item_height:
             new_subvolumes.append(SubVolume(item_x, item_y + item_length, item_z + item_height,
-                                            item_width, subvolume.length - item_length, subvolume.height - item_height))
+                                            item_width, subvolume_length - item_length, subvolume_height - item_height))
 
-        if subvolume.width > item_width and subvolume.length > item_length and subvolume.height > item_height:
+        # Remaining space to the right and in front
+        if subvolume_width > item_width and subvolume_length > item_length:
+            new_subvolumes.append(SubVolume(item_x + item_width, item_y + item_length, item_z,
+                                            subvolume_width - item_width, subvolume_length - item_length, item_height))
+
+        # Remaining space to the right, in front, and above
+        if subvolume_width > item_width and subvolume_length > item_length and subvolume_height > item_height:
             new_subvolumes.append(SubVolume(item_x + item_width, item_y + item_length, item_z + item_height,
-                                            subvolume.width - item_width, subvolume.length - item_length, subvolume.height - item_height))
+                                            subvolume_width - item_width, subvolume_length - item_length, subvolume_height - item_height))
 
         return new_subvolumes
+
 
     def is_supported(self, item_position, item_orientation):
         item_x, item_y, item_z = item_position
@@ -110,61 +177,29 @@ class Container:
 
         return False
 
-    def pack_items(self, items, method='DBL'):
-        if method == 'DBL':
-            self.pack_items_dbl(items)
-        else:
-            raise ValueError(f"Unknown packing method: {method}")
-
-    def pack_items_dbl(self, items):
-        best_packing = []
-        best_packing_count = 0
-        iterations = 1000  # Number of iterations to attempt
-
-        for _ in range(iterations):
-            self.reset()
-            random_items = random.sample(items, len(items))  # Randomly shuffle items
-            load_order = 0  # Initialize load order counter
-            for item in random_items:
-                placed = False
-                random_orientations = random.sample(item.possible_orientations(), len(item.possible_orientations()))  # Randomly shuffle orientations
-                for subvolume in self.sub_volumes:
-                    for orientation in random_orientations:
-                        if subvolume.can_accommodate(orientation):
-                            item_position = (subvolume.x, subvolume.y, subvolume.z)
-                            if self.is_supported(item_position, orientation):
-                                load_order += 1  # Increment load order
-                                self.packed_items.append((item.id, item_position, orientation, item.location, load_order, item.weight))
-                                new_subvolumes = self.create_new_subvolumes(subvolume, orientation, item_position)
-                                self.sub_volumes.remove(subvolume)
-                                for new_subvolume in new_subvolumes:
-                                    self.insert_subvolume(new_subvolume)
-                                placed = True
-                                break
-                    if placed:
-                        break
-                if not placed:
-                    print(f"Item {item.id} could not be placed in this iteration.")
-                    break
-            if len(self.packed_items) > best_packing_count:
-                best_packing = list(self.packed_items)
-                best_packing_count = len(self.packed_items)
-
-        self.packed_items = best_packing
+    def calculate_capacity_utilization(self):
+        total_container_volume = self.width * self.length * self.height
+        packed_volume = 0
+        for item in self.packed_items:
+            item_volume = item[2][0] * item[2][1] * item[2][2]
+            packed_volume += item_volume
+            print(f"Item ID: {item[0]}, Volume: {item_volume}, Cumulative Packed Volume: {packed_volume}")
+        print(f"Total Container Volume: {total_container_volume}")
+        return packed_volume / total_container_volume
 
     def reset(self):
         self.sub_volumes = [SubVolume(0, 0, 0, self.width, self.length, self.height)]
-        self.packed_items = []  
-        return 
+        self.packed_items = []
+
 
 def main():
-    container = Container(container_size[0], container_size[1], container_size[2])
-    container.pack_items(items, method='DBL')
+    container = PackingAlgorithm(container_size[0], container_size[1], container_size[2])
+    container.pack_items_dbl(items)
 
     print("Packed Items:")
     for packed_item in container.packed_items:
         print(f"Item ID: {packed_item[0]}, Position: {packed_item[1]}, Orientation: {packed_item[2]}, Location: {packed_item[3]}, Load Order: {packed_item[4]}, Weight: {packed_item[5]}")
-
+ 
     # Save packed items to a JSON file
     packed_items_data = [
         {"id": packed_item[0], "position": packed_item[1], "orientation": packed_item[2], "location": packed_item[3], "load_order": packed_item[4], "weight": packed_item[5], "dimensions": (packed_item[2][0], packed_item[2][1], packed_item[2][2])}
@@ -172,6 +207,10 @@ def main():
     ]
     with open('packed_items.json', 'w') as f:
         json.dump(packed_items_data, f, indent=4)
+
+    # Calculate and print the capacity utilization
+    capacity_utilization = container.calculate_capacity_utilization()
+    print(f"Capacity Utilization: {capacity_utilization:.2%}")
 
 if __name__ == "__main__":
     main()

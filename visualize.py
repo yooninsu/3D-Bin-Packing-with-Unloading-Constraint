@@ -44,7 +44,7 @@ def draw_cuboid(ax, position, size, color='blue', alpha=0.3):
     faces.set_facecolor(color)
     faces.set_alpha(alpha)
     ax.add_collection3d(faces)
-
+    
 def visualize_packed_items(container_size, packed_items):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
