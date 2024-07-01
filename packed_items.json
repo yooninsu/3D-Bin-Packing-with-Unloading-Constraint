@@ -1,0 +1,632 @@
+[
+    {
+        "id": 27,
+        "position": [
+            0,
+            0,
+            0
+        ],
+        "orientation": [
+            48,
+            38,
+            34
+        ],
+        "location": "po1",
+        "load_order": 1,
+        "weight": 1.79,
+        "dimensions": [
+            48,
+            38,
+            34
+        ]
+    },
+    {
+        "id": 26,
+        "position": [
+            0,
+            38,
+            0
+        ],
+        "orientation": [
+            39,
+            54,
+            34
+        ],
+        "location": "po3",
+        "load_order": 2,
+        "weight": 1.65,
+        "dimensions": [
+            39,
+            54,
+            34
+        ]
+    },
+    {
+        "id": 14,
+        "position": [
+            48,
+            0,
+            0
+        ],
+        "orientation": [
+            41,
+            28,
+            31
+        ],
+        "location": "po2",
+        "load_order": 3,
+        "weight": 4.91,
+        "dimensions": [
+            41,
+            28,
+            31
+        ]
+    },
+    {
+        "id": 30,
+        "position": [
+            0,
+            0,
+            34
+        ],
+        "orientation": [
+            27,
+            18,
+            15
+        ],
+        "location": "po1",
+        "load_order": 4,
+        "weight": 5.48,
+        "dimensions": [
+            27,
+            18,
+            15
+        ]
+    },
+    {
+        "id": 22,
+        "position": [
+            48,
+            38,
+            0
+        ],
+        "orientation": [
+            38,
+            48,
+            34
+        ],
+        "location": "po1",
+        "load_order": 5,
+        "weight": 3.69,
+        "dimensions": [
+            38,
+            48,
+            34
+        ]
+    },
+    {
+        "id": 4,
+        "position": [
+            0,
+            38,
+            34
+        ],
+        "orientation": [
+            31,
+            28,
+            41
+        ],
+        "location": "po2",
+        "load_order": 6,
+        "weight": 8.39,
+        "dimensions": [
+            31,
+            28,
+            41
+        ]
+    },
+    {
+        "id": 16,
+        "position": [
+            48,
+            38,
+            34
+        ],
+        "orientation": [
+            39,
+            54,
+            34
+        ],
+        "location": "po5",
+        "load_order": 7,
+        "weight": 7.29,
+        "dimensions": [
+            39,
+            54,
+            34
+        ]
+    },
+    {
+        "id": 8,
+        "position": [
+            0,
+            92,
+            0
+        ],
+        "orientation": [
+            38,
+            48,
+            34
+        ],
+        "location": "po1",
+        "load_order": 8,
+        "weight": 9.32,
+        "dimensions": [
+            38,
+            48,
+            34
+        ]
+    },
+    {
+        "id": 23,
+        "position": [
+            48,
+            86,
+            0
+        ],
+        "orientation": [
+            38,
+            48,
+            34
+        ],
+        "location": "po1",
+        "load_order": 9,
+        "weight": 8.19,
+        "dimensions": [
+            38,
+            48,
+            34
+        ]
+    },
+    {
+        "id": 18,
+        "position": [
+            89,
+            0,
+            0
+        ],
+        "orientation": [
+            15,
+            18,
+            27
+        ],
+        "location": "po1",
+        "load_order": 10,
+        "weight": 2.8,
+        "dimensions": [
+            15,
+            18,
+            27
+        ]
+    },
+    {
+        "id": 19,
+        "position": [
+            86,
+            38,
+            0
+        ],
+        "orientation": [
+            28,
+            41,
+            31
+        ],
+        "location": "po3",
+        "load_order": 11,
+        "weight": 7.38,
+        "dimensions": [
+            28,
+            41,
+            31
+        ]
+    },
+    {
+        "id": 28,
+        "position": [
+            86,
+            86,
+            0
+        ],
+        "orientation": [
+            28,
+            41,
+            31
+        ],
+        "location": "po1",
+        "load_order": 12,
+        "weight": 7.04,
+        "dimensions": [
+            28,
+            41,
+            31
+        ]
+    },
+    {
+        "id": 25,
+        "position": [
+            0,
+            18,
+            34
+        ],
+        "orientation": [
+            27,
+            18,
+            15
+        ],
+        "location": "po5",
+        "load_order": 13,
+        "weight": 1.69,
+        "dimensions": [
+            27,
+            18,
+            15
+        ]
+    },
+    {
+        "id": 2,
+        "position": [
+            0,
+            0,
+            49
+        ],
+        "orientation": [
+            27,
+            15,
+            18
+        ],
+        "location": "po2",
+        "load_order": 14,
+        "weight": 6.04,
+        "dimensions": [
+            27,
+            15,
+            18
+        ]
+    },
+    {
+        "id": 9,
+        "position": [
+            0,
+            66,
+            34
+        ],
+        "orientation": [
+            25,
+            21,
+            34
+        ],
+        "location": "po5",
+        "load_order": 15,
+        "weight": 2.41,
+        "dimensions": [
+            25,
+            21,
+            34
+        ]
+    },
+    {
+        "id": 15,
+        "position": [
+            0,
+            18,
+            49
+        ],
+        "orientation": [
+            27,
+            18,
+            15
+        ],
+        "location": "po5",
+        "load_order": 16,
+        "weight": 3.32,
+        "dimensions": [
+            27,
+            18,
+            15
+        ]
+    },
+    {
+        "id": 10,
+        "position": [
+            31,
+            38,
+            34
+        ],
+        "orientation": [
+            15,
+            27,
+            18
+        ],
+        "location": "po2",
+        "load_order": 17,
+        "weight": 4.48,
+        "dimensions": [
+            15,
+            27,
+            18
+        ]
+    },
+    {
+        "id": 21,
+        "position": [
+            0,
+            38,
+            75
+        ],
+        "orientation": [
+            25,
+            21,
+            34
+        ],
+        "location": "po4",
+        "load_order": 18,
+        "weight": 6.48,
+        "dimensions": [
+            25,
+            21,
+            34
+        ]
+    },
+    {
+        "id": 11,
+        "position": [
+            48,
+            92,
+            34
+        ],
+        "orientation": [
+            38,
+            48,
+            34
+        ],
+        "location": "po3",
+        "load_order": 19,
+        "weight": 3.19,
+        "dimensions": [
+            38,
+            48,
+            34
+        ]
+    },
+    {
+        "id": 5,
+        "position": [
+            31,
+            66,
+            34
+        ],
+        "orientation": [
+            15,
+            18,
+            27
+        ],
+        "location": "po1",
+        "load_order": 20,
+        "weight": 2.55,
+        "dimensions": [
+            15,
+            18,
+            27
+        ]
+    },
+    {
+        "id": 12,
+        "position": [
+            48,
+            38,
+            68
+        ],
+        "orientation": [
+            34,
+            21,
+            25
+        ],
+        "location": "po2",
+        "load_order": 21,
+        "weight": 3.26,
+        "dimensions": [
+            34,
+            21,
+            25
+        ]
+    },
+    {
+        "id": 13,
+        "position": [
+            48,
+            92,
+            68
+        ],
+        "orientation": [
+            21,
+            34,
+            25
+        ],
+        "location": "po4",
+        "load_order": 22,
+        "weight": 9.23,
+        "dimensions": [
+            21,
+            34,
+            25
+        ]
+    },
+    {
+        "id": 3,
+        "position": [
+            0,
+            140,
+            0
+        ],
+        "orientation": [
+            15,
+            18,
+            27
+        ],
+        "location": "po2",
+        "load_order": 23,
+        "weight": 2.93,
+        "dimensions": [
+            15,
+            18,
+            27
+        ]
+    },
+    {
+        "id": 29,
+        "position": [
+            48,
+            134,
+            0
+        ],
+        "orientation": [
+            25,
+            34,
+            21
+        ],
+        "location": "po4",
+        "load_order": 24,
+        "weight": 3.83,
+        "dimensions": [
+            25,
+            34,
+            21
+        ]
+    },
+    {
+        "id": 1,
+        "position": [
+            86,
+            127,
+            0
+        ],
+        "orientation": [
+            28,
+            41,
+            31
+        ],
+        "location": "po1",
+        "load_order": 25,
+        "weight": 8.71,
+        "dimensions": [
+            28,
+            41,
+            31
+        ]
+    },
+    {
+        "id": 17,
+        "position": [
+            0,
+            0,
+            67
+        ],
+        "orientation": [
+            18,
+            15,
+            27
+        ],
+        "location": "po5",
+        "load_order": 26,
+        "weight": 1.73,
+        "dimensions": [
+            18,
+            15,
+            27
+        ]
+    },
+    {
+        "id": 24,
+        "position": [
+            39,
+            38,
+            0
+        ],
+        "orientation": [
+            9,
+            19,
+            22
+        ],
+        "location": "po3",
+        "load_order": 27,
+        "weight": 9.68,
+        "dimensions": [
+            9,
+            19,
+            22
+        ]
+    },
+    {
+        "id": 6,
+        "position": [
+            0,
+            87,
+            34
+        ],
+        "orientation": [
+            18,
+            15,
+            27
+        ],
+        "location": "po4",
+        "load_order": 28,
+        "weight": 9.32,
+        "dimensions": [
+            18,
+            15,
+            27
+        ]
+    },
+    {
+        "id": 7,
+        "position": [
+            39,
+            92,
+            0
+        ],
+        "orientation": [
+            9,
+            22,
+            19
+        ],
+        "location": "po4",
+        "load_order": 29,
+        "weight": 8.69,
+        "dimensions": [
+            9,
+            22,
+            19
+        ]
+    },
+    {
+        "id": 20,
+        "position": [
+            48,
+            28,
+            0
+        ],
+        "orientation": [
+            22,
+            9,
+            19
+        ],
+        "location": "po3",
+        "load_order": 30,
+        "weight": 1.87,
+        "dimensions": [
+            22,
+            9,
+            19
+        ]
+    }
+]
